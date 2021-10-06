@@ -1,0 +1,43 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        {% for i in notes%}
+        <div class="col-md-3 mx-2 my-2">
+            <a href="/notes_detail/{{i.id}}">
+                <div class="card">
+                    <div class="card-header">{{i.title}}</div>
+                    <div class="card-body">{{i.description|slice:"0:100"}}</div>
+                    <div class="card-footer mt-auto  ">
+                        <a  class = "btn btn-danger" href="/delete_note/{{i.id}}/"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor%}
+    
+
+        <br><br>
+
+    </div>
+</div>s
+<br><br>
+<div class="container">
+    <form action = "" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Create Notes</legend>
+        </fieldset>
+        {% for i in forms %}
+        <div class = "form-group">
+            {{i.label_tag}}{{i}}<small class = "text-danger">{{i.errors|striptags}}</small>
+        </div>
+        {% endfor %}
+        <button href="" class="btn btn-outline-info" type="submit">Create</button>
+    </form>
+</div>
+
+
+{% endblock content %}
